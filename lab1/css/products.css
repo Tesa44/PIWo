@@ -1,0 +1,18 @@
+.section-products {
+  padding: 9.6rem 0;
+}
+
+.container--products {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  height: 100rem;
+  width: 130rem;
+}
+
+.filters {
+  background-color: aqua;
+}
+
+.products {
+  background-color: blueviolet;
+}
