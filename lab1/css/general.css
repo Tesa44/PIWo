@@ -84,6 +84,13 @@ body {
   font-weight: 700;
 }
 
+.heading-tertiary {
+  font-size: 2.4rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
 .container {
   max-width: 130rem;
   margin: 0 auto;
@@ -101,4 +108,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.margin-top--sm {
+  margin-top: 2.4rem;
 }
