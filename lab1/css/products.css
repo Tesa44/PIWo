@@ -22,7 +22,13 @@
 }
 
 .products {
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  padding: 3.2rem;
+  border: 2px solid #333;
+  gap: 4.8rem;
 }
 
 .filter-list {
@@ -52,4 +58,59 @@
 .btn--add {
   border: 2px solid #333;
   border-radius: 9px;
+}
+
+.product-box {
+  background-color: #fff;
+  border-radius: 11px;
+  overflow: hidden;
+  border: 2px solid #888;
+  height: 80rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 3.2rem;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  list-style: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  gap: 2rem;
+  margin-bottom: 2.4rem;
+  /* justify-content: space-between; */
+}
+
+.features-link p {
+  margin-bottom: 1.2rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.book-price {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.btn--shop {
+  border: 2px solid #333;
+  border-radius: 9px;
+  padding: 1.2rem 1.6rem;
 }
