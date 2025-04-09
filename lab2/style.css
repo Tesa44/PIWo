@@ -126,3 +126,7 @@ body {
   justify-self: center;
   margin-top: 10px;
 }
+
+.crossed-out {
+  text-decoration-line: line-through;
+}
