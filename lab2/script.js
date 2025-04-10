@@ -5,7 +5,10 @@ const btnAdd = document.querySelector(".btn--add");
 const inputEl = document.getElementById("add-text");
 const btnRestore = document.querySelector(".btn--restore");
 const dateEls = document.querySelectorAll(".item-date");
-
+const modal = document.querySelector(".modal");
+const closeModal = document.querySelector(".close");
+const btnYes = document.querySelector(".btn--yes");
+const btnNo = document.querySelector(".btn--no");
 // Data format options
 const options = {
   hour: "numeric",
@@ -18,7 +21,7 @@ const options = {
 const locale = navigator.language;
 
 let lastDeletedTask = null;
-
+let currentTaskToDelete = null;
 // Cross-out task, when click on it
 listContainer.addEventListener("click", function (e) {
   const textEl = e.target.closest(".item-text");
@@ -85,24 +88,51 @@ inputEl.addEventListener("keypress", function (e) {
   }
 });
 
-// Delete task, when click on red trash can
+// Delete task, when click Yes on modal
+btnYes.addEventListener("click", function (e) {
+  if (!currentTaskToDelete) return;
+
+  currentTaskToDelete.remove();
+  modal.classList.add("hidden");
+  lastDeletedTask = currentTaskToDelete;
+  currentTaskToDelete = null;
+});
+
+// Close modal, when click No on modal
+btnNo.addEventListener("click", function (e) {
+  modal.classList.add("hidden");
+  currentTaskToDelete = null;
+});
+
+// Show modal, when click on red trash can
 listContainer.addEventListener("click", function (e) {
   const btnDelete = e.target.closest(".btn--delete");
 
   if (!btnDelete) return;
 
+  modal.classList.remove("hidden");
   const listEl = btnDelete.parentElement;
-  lastDeletedTask = listEl.outerHTML;
-
-  listEl.remove();
+  currentTaskToDelete = listEl;
 });
 
 // Restore only last deleted task, when click on "Restore" button
 btnRestore.addEventListener("click", function (e) {
   if (!lastDeletedTask) return;
 
-  listContainer.insertAdjacentHTML("beforeend", lastDeletedTask);
+  listContainer.insertAdjacentHTML("beforeend", lastDeletedTask.outerHTML);
   lastDeletedTask = null;
+});
+
+// Close modal, when click on span el "X"
+closeModal.addEventListener("click", function (e) {
+  modal.style.display = "none";
+});
+
+// Close modal, when click outside the modal
+window.addEventListener("click", function (e) {
+  if (e.target === modal) {
+    modal.classList.add("hidden");
+  }
 });
 
 // Nothing important

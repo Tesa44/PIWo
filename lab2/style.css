@@ -88,7 +88,7 @@ body {
 .list-item {
   display: grid;
   grid-template-columns: 80% 20%;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 3fr 2fr;
   align-items: center;
   background-color: #444;
   padding: 1.6rem 1.2rem;
@@ -145,4 +145,72 @@ body {
   font-family: inherit;
   padding: 1rem 2rem;
   margin-top: 2.4rem;
+}
+
+/* The Modal (background) */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #333;
+  margin: auto;
+  padding: 20px;
+  border-radius: 11px;
+  width: 50%;
+}
+
+.modal-text {
+  font-size: 3.2rem;
+  padding: 0 3.2rem;
+}
+
+.container-modal-btn {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  gap: 4.8rem;
+}
+
+.btn--yes,
+.btn--no {
+  color: #333;
+  background-color: #fff;
+  border-radius: 11px;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-family: inherit;
+  padding: 1rem 2rem;
+  margin-top: 1.6rem;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
