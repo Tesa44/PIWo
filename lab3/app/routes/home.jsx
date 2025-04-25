@@ -2,6 +2,8 @@ import { Welcome } from "../welcome/welcome";
 import NavBar from "../Components/NavBar";
 import Hero from "../Components/Hero";
 import Products from "../Components/Products";
+import { ProductsProvider } from "../Contexts/ProductsContext";
+import ProductFilters from "../Components/ProductFilters";
 export function meta() {
   return [
     { title: "New React Router App" },
@@ -14,7 +16,9 @@ export default function Home() {
     <>
       <NavBar />
       <Hero />
-      <Products />
+      <ProductsProvider>
+        <Products />
+      </ProductsProvider>
     </>
   );
 }
