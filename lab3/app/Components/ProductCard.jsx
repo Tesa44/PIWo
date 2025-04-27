@@ -1,39 +1,34 @@
-import React from "react";
+import "../styles/general.css";
+import "../styles/products.css";
 
-const ProductCard = ({ product }) => {
+export default function ProductCard({ product }) {
   return (
-    <div class="product-box">
-      <img class="book-img" src="./img/book-1.jpg" alt="book" />
-      <div class="book-content">
-        <h3 class="heading-tertiary">{product.title}</h3>
-        <ul class="features-list">
-          <li class="features-link">
+    <div className="product-box">
+      <div className="book-content">
+        <h3 className="heading-tertiary">{product.title}</h3>
+        <ul className="features-list">
+          <li className="features-link">
             <p>Genre</p>
-            <span>{products.genre}</span>
+            <span>{product.genre}</span>
           </li>
-
-          <li class="features-link">
+          <li className="features-link">
             <p>Age group</p>
-            <span>{products.age}</span>
+            <span>{product.ageGroup}</span>
           </li>
-
-          <li class="features-link">
+          <li className="features-link">
             <p>Key words</p>
             <span>{product.keyWords}</span>
           </li>
-
-          <li class="features-link">
+          <li className="features-link">
             <p>Author</p>
             <span>{product.author}</span>
           </li>
         </ul>
-        <div class="book-price">
+        <div className="book-price">
           <span>{product.price} €</span>
-          <button class="btn btn--shop">Add to cart</button>
+          <button className="btn btn--shop">Add to cart</button>
         </div>
       </div>
     </div>
   );
-};
-
-export default ProductCard;
+}

@@ -1,44 +1,43 @@
-import React from "react";
+import { useState } from "react";
+import "../styles/general.css";
+import "../styles/products.css";
 
-const ProductFilters = ({ filters, setFilters, onSearch }) => {
+export default function ProductFilters({ filters, setFilters, onSearch }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFilters((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFilters((prev) => ({ ...prev, [name]: value }));
   };
+
   return (
-    <form class="filters">
-      <h3 class="heading-tertiary">Filters</h3>
-      <ul class="filter-list">
-        <li class="filter-link">
+    <form className="filters" onSubmit={onSearch}>
+      <h3 className="heading-tertiary">Filters</h3>
+      <ul className="filter-list">
+        <li className="filter-link">
           <p>Title</p>
-          <input type="text" id="title" name="title" value={filters.title} />
-        </li>
-        <li class="filter-link">
-          <p>Genre</p>
-          <select
-            id="genre"
-            name="genre"
+          <input
+            type="text"
+            name="title"
+            value={filters.title}
             onChange={handleChange}
-            value={filters.genre}
-          >
+          />
+        </li>
+        <li className="filter-link">
+          <p>Genre</p>
+          <select name="genre" value={filters.genre} onChange={handleChange}>
             <option value="">All</option>
             <option value="Fantasy">Fantasy</option>
-            <option value="Thiller">Thiller</option>
+            <option value="Thriller">Thiller</option>
             <option value="Horror">Horror</option>
             <option value="Action">Action</option>
             <option value="Sci-Fi">Sci-Fi</option>
           </select>
         </li>
-        <li class="filter-link">
+        <li className="filter-link">
           <p>Age group</p>
           <select
-            id="age"
-            name="age"
+            name="ageGroup"
+            value={filters.ageGroup}
             onChange={handleChange}
-            value={filters.age}
           >
             <option value="">All</option>
             <option value="Kids">Kids</option>
@@ -46,32 +45,28 @@ const ProductFilters = ({ filters, setFilters, onSearch }) => {
             <option value="Adults">Adults</option>
           </select>
         </li>
-        <li class="filter-link">
+        <li className="filter-link">
           <p>Key words</p>
           <input
             type="text"
-            id="key-words"
-            name="key-words"
+            name="keyWords"
             value={filters.keyWords}
+            onChange={handleChange}
           />
         </li>
-        <li class="filter-link">
+        <li className="filter-link">
           <p>Author name</p>
           <input
             type="text"
-            id="author-name"
-            name="author-name"
+            name="author"
             value={filters.author}
+            onChange={handleChange}
           />
         </li>
       </ul>
-      <button type="submit" onClick={onSearch} class="btn btn--add">
+      <button type="submit" className="btn btn--add">
         Search
       </button>
-      <span>Add your product</span>
-      <button class="btn btn--add">+ Add product</button>
     </form>
   );
-};
-
-export default ProductFilters;
+}

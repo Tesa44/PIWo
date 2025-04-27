@@ -1,76 +1,83 @@
-import { Welcome } from "../welcome/welcome";
-import NavBar from "../Components/NavBar";
-import Hero from "../Components/Hero";
-import Products from "../Components/Products";
-import { ProductsProvider } from "../Contexts/ProductsContext";
-import ProductFilters from "../Components/ProductFilters";
-import { useProducts } from "../Contexts/ProductsContext"
 import { useState } from "react";
+import { useProducts } from "../Contexts/ProductContext";
+import ProductFilters from "../Components/ProductFilters";
+import ProductList from "../Components/ProductList";
+import { ProductProvider } from "../Contexts/ProductContext";
+
 export function meta() {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Our Products" },
+    { name: "description", content: "Browse our product collection" },
   ];
 }
 
 export default function Home() {
-  const products = useProducts()
-
+  const products = useProducts();
+  console.log(products);
   const [filters, setFilters] = useState({
-    title: '',
-    genre: '',
-    age: '',
-    author: '',
-    keyWords: '',
+    title: "",
+    genre: "",
+    ageGroup: "",
+    keyWords: "",
+    author: "",
   });
-
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filteredProducts, setFilteredProducts] = useState(products || []);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
-    const filtered = products.filter(product => {
-      const matchesTitle = product.title
-      .toLowerCase()
-      .includes(filters.title.toLowerCase());
-
-    const matchesGenre = filters.genre ? product.genre === filters.genre : true;
-
-    const matchesAge = filters.age ? product.age === filters.age : true;
-
-    const matchesKeyWords = product.keyWords
-      .toLowerCase()
-      .includes(filters.keyWords.toLowerCase());
-
-    const matchesAuthor = product.author
-      .toLowerCase()
-      .includes(filters.author.toLowerCase());
-
-    return (
-      matchesTitle &&
-      matchesGenre &&
-      matchesAge &&
-      matchesKeyWords &&
-      matchesAuthor
+    const isFilteringEmpty = Object.values(filters).every(
+      (value) => value === ""
     );
+
+    if (isFilteringEmpty) {
+      // Jeśli nic nie wpisano w filtry, pokaż wszystkie produkty
+      setFilteredProducts(products);
+      return;
+    }
+
+    const filtered = products.filter((product) => {
+      const matchesTitle = product.title
+        .toLowerCase()
+        .includes(filters.title.toLowerCase());
+      const matchesGenre = filters.genre
+        ? product.genre === filters.genre
+        : true;
+      const matchesAge = filters.ageGroup
+        ? product.ageGroup === filters.ageGroup
+        : true;
+      const matchesKeyWords = product.keyWords
+        .toLowerCase()
+        .includes(filters.keyWords.toLowerCase());
+      const matchesAuthor = product.author
+        .toLowerCase()
+        .includes(filters.author.toLowerCase());
+
+      return (
+        matchesTitle &&
+        matchesGenre &&
+        matchesAge &&
+        matchesKeyWords &&
+        matchesAuthor
+      );
     });
 
     setFilteredProducts(filtered);
   };
 
   return (
-    <>
-      <NavBar />
-      <Hero />
-      <ProductsProvider>
-      <ProductFilters
-        filters={filters}
-        setFilters={setFilters}
-        onSearch={handleSearch}
-      />
-
-        <Products products={filteredProducts} />
-      </ProductsProvider>
-    </>
+    <section className="section-products">
+      <div className="flex--center-v">
+        <span className="subheading">Our products</span>
+        <div className="grid container container--products">
+          <ProductFilters
+            filters={filters}
+            setFilters={setFilters}
+            onSearch={handleSearch}
+          />
+          <ProductList products={filteredProducts} />
+        </div>
+      </div>
+    </section>
   );
 }
