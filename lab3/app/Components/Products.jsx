@@ -10,7 +10,7 @@ export default function Products({ filters }) {
   const filteredProducts = products.filter((product) => {
     const matchesTitle = product.title
       .toLowerCase()
-      .includes(filters.search.toLowerCase());
+      .includes(filters.title.toLowerCase());
 
     const matchesGenre = filters.genre ? product.genre === filters.genre : true;
 
