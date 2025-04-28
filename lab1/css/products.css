@@ -34,7 +34,6 @@
 .filter-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 2rem;
   list-style: none;
 }
@@ -46,7 +45,8 @@
   font-size: 1.6rem;
 }
 
-.filter-link input {
+.filter-link input,
+.filter-link select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

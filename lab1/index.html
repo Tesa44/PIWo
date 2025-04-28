@@ -47,29 +47,62 @@
             <div class="flex--center-v">
             <span class="subheading">Our products</span>
             <div class="grid container container--products">
-                <div class="filters">
+                <form class="filters">
                     <h3 class="heading-tertiary">Filters</h3>
                     <ul class="filter-list">
-                        <li class="filter-link">
-                            <p>Genre</p>
-                            <input type="text" id="genre">
-                        </li>
-                        <li class="filter-link">
-                            <p>Age group</p>
-                            <input type="text" id="age-group">
-                        </li>
-                        <li class="filter-link">
-                            <p>Key words</p>
-                            <input type="text" id="key-words">
-                        </li>
-                        <li class="filter-link">
-                            <p>Author name</p>
-                            <input type="text" id="author-name">
-                        </li>
+                      <li class="filter-link">
+                        <p>Title</p>
+                        <input type="text" id="title" name="title" />
+                      </li>
+                      <li class="filter-link">
+                        <p>Genre</p>
+                        <select
+                          id="genre"
+                          name="genre"
+                        >
+                          <option value="">All</option>
+                          <option value="Fantasy">Fantasy</option>
+                          <option value="Thiller">Thiller</option>
+                          <option value="Horror">Horror</option>
+                          <option value="Action">Action</option>
+                          <option value="Sci-Fi">Sci-Fi</option>
+                        </select>
+                      </li>
+                      <li class="filter-link">
+                        <p>Age group</p>
+                        <select
+                          id="age"
+                          name="age"
+                        >
+                          <option value="">All</option>
+                          <option value="Kids">Kids</option>
+                          <option value="Teenagers">Teenagers</option>
+                          <option value="Adults">Adults</option>
+                        </select>
+                      </li>
+                      <li class="filter-link">
+                        <p>Key words</p>
+                        <input
+                          type="text"
+                          id="key-words"
+                          name="key-words"
+                        />
+                      </li>
+                      <li class="filter-link">
+                        <p>Author name</p>
+                        <input
+                          type="text"
+                          id="author-name"
+                          name="author-name"
+                        />
+                      </li>
                     </ul>
+                    <button type="submit" class="btn btn--add">
+                      Search
+                    </button>
                     <span>Add your product</span>
                     <button class="btn btn--add">+ Add product</button>
-                </div>
+                  </form>
                 <div class="products">
                     <div class="product-box">
                         <img class="book-img" src="./img/book-1.jpg" alt="book"/>
