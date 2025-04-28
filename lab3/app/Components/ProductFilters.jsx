@@ -26,7 +26,7 @@ export default function ProductFilters({ filters, setFilters, onSearch }) {
           <select name="genre" value={filters.genre} onChange={handleChange}>
             <option value="">All</option>
             <option value="Fantasy">Fantasy</option>
-            <option value="Thriller">Thiller</option>
+            <option value="Thriller">Thriller</option>
             <option value="Horror">Horror</option>
             <option value="Action">Action</option>
             <option value="Sci-Fi">Sci-Fi</option>

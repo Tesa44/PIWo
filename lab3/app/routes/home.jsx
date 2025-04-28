@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useProducts } from "../Contexts/ProductContext";
+import Hero from "../Components/Hero"
+import NavBar from "../Components/NavBar"
 import ProductFilters from "../Components/ProductFilters";
 import ProductList from "../Components/ProductList";
-import { ProductProvider } from "../Contexts/ProductContext";
-
+import { ProductProvider, useProducts } from "../Contexts/ProductContext";
 export function meta() {
   return [
     { title: "Our Products" },
@@ -12,15 +12,15 @@ export function meta() {
 }
 
 export default function Home() {
-  const products = useProducts();
-  console.log(products);
+  const {products} = useProducts();
+
   const [filters, setFilters] = useState({
     title: "",
     genre: "",
     ageGroup: "",
     keyWords: "",
     author: "",
-  });
+  });   
   const [filteredProducts, setFilteredProducts] = useState(products || []);
 
   const handleSearch = (e) => {
@@ -30,11 +30,11 @@ export default function Home() {
       (value) => value === ""
     );
 
-    if (isFilteringEmpty) {
-      // Jeśli nic nie wpisano w filtry, pokaż wszystkie produkty
-      setFilteredProducts(products);
-      return;
-    }
+    // if (isFilteringEmpty) {
+    //   // Jeśli nic nie wpisano w filtry, pokaż wszystkie produkty
+    //   setFilteredProducts(products);
+    //   return;
+    // }
 
     const filtered = products.filter((product) => {
       const matchesTitle = product.title
@@ -66,18 +66,18 @@ export default function Home() {
   };
 
   return (
+    <>
+    <NavBar></NavBar>
+    <Hero></Hero>
     <section className="section-products">
       <div className="flex--center-v">
         <span className="subheading">Our products</span>
         <div className="grid container container--products">
-          <ProductFilters
-            filters={filters}
-            setFilters={setFilters}
-            onSearch={handleSearch}
-          />
-          <ProductList products={filteredProducts} />
+            <ProductFilters filters={filters} setFilters={setFilters} onSearch={handleSearch} />
+            <ProductList products={filteredProducts} />
         </div>
       </div>
     </section>
+    </>
   );
 }

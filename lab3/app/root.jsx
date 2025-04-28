@@ -6,6 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { ProductProvider, useProducts } from "./Contexts/ProductContext";
+
 
 import stylesheet from "./app.css?url";
 
@@ -42,7 +44,10 @@ export function Layout({ children }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (<ProductProvider>
+    <Outlet />
+    </ProductProvider>);
+  
 }
 
 export function ErrorBoundary({ error }) {
