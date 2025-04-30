@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../styles/general.css";
 import "../styles/products.css";
+import { Link } from "react-router-dom";
 
 export default function ProductFilters({ filters, setFilters, onSearch }) {
   const handleChange = (e) => {
@@ -67,6 +68,10 @@ export default function ProductFilters({ filters, setFilters, onSearch }) {
       <button type="submit" className="btn btn--add">
         Search
       </button>
+      <span>Add your product</span>
+      <Link to="/new">
+        <button class="btn btn--add">Add product</button>
+      </Link>
     </form>
   );
 }

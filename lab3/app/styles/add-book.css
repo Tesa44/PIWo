@@ -1,4 +1,64 @@
+.section-add-book {
+  /* background-color: #fff; */
+  background-image: linear-gradient(to bottom right, #c5f6fa, #ffe8cc);
+}
+
 .container--add-book {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100rem;
+  min-height: 100vh;
+  /* background-color: #fff; */
+}
+
+.upload {
+  /* height: 100%; */
+  /* padding: 6.4rem; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.upload__heading {
+  font-size: 3.6rem;
+  font-weight: 600;
+  margin-bottom: 2.4rem;
+}
+
+.upload input {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  border: 2px solid #333;
+  border-radius: 9px;
+  font-size: 1.8rem;
+}
+
+.upload label {
+  font-size: 1.8rem;
+  align-self: baseline;
+}
+
+.btn--upload {
+  border: 2px solid #333;
+  border-radius: 9px;
+  padding: 2.4rem 4.8rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

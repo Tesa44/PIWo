@@ -30,12 +30,6 @@ export default function Home() {
       (value) => value === ""
     );
 
-    // if (isFilteringEmpty) {
-    //   // Jeśli nic nie wpisano w filtry, pokaż wszystkie produkty
-    //   setFilteredProducts(products);
-    //   return;
-    // }
-
     const filtered = products.filter((product) => {
       const matchesTitle = product.title
         .toLowerCase()
