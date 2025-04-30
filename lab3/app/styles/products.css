@@ -114,3 +114,18 @@
   border-radius: 9px;
   padding: 1.2rem 1.6rem;
 }
+
+.container--buttons {
+  display: flex;
+  gap: 1.2rem;
+  align-self: flex-end;
+}
+
+.btn--edit,
+.btn--delete {
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}

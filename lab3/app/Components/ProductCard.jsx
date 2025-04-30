@@ -1,10 +1,14 @@
 import "../styles/general.css";
 import "../styles/products.css";
-
+// import { ReactComponent as EditIcon } from "../icons/pencil-simple.svg";
 export default function ProductCard({ product }) {
   return (
     <div className="product-box">
       <div className="book-content">
+        <div className="container--buttons">
+          <button className="btn btn--edit">Edit</button>
+          <button className="btn btn--delete">Delete</button>
+        </div>
         <h3 className="heading-tertiary">{product.title}</h3>
         <ul className="features-list">
           <li className="features-link">
