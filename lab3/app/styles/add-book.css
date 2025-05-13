@@ -62,3 +62,29 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.message-login {
+  font-size: 3.2rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.container--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 2rem;
+}
+
+.container--form-buttons {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.btn--back {
+  border: 2px solid #333;
+  border-radius: 9px;
+  margin-bottom: 2.4rem;
+}

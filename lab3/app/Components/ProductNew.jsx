@@ -4,8 +4,11 @@ import { collection, addDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useUser } from "../Services/UserService";
 import { db } from "../Services/init";
+import { useNavigate, Link } from "react-router-dom";
+
 export default function ProductNew() {
   const user = useUser();
+  const navigate = useNavigate();
 
   const [bookData, setBookData] = useState({
     title: "",
@@ -27,7 +30,7 @@ export default function ProductNew() {
     e.preventDefault();
 
     if (!user) {
-      alert("Musisz być zalogowany, aby wysłać formularz.");
+      alert("You have to log in to send a form");
       return;
     }
 
@@ -36,24 +39,34 @@ export default function ProductNew() {
         ...bookData,
         userID: user.uid, // UID zalogowanego użytkownika
       });
-
-      alert("Dane wysłane!");
-      setBookData({ name: "", email: "" });
-    } catch (error) {
-      console.error("Błąd:", error);
+      setBookData({
+        title: "",
+        genre: "",
+        author: "",
+        ageGroup: "",
+        keyWords: "",
+      });
+    } catch (err) {
+      console.error(err);
     }
+    navigate("/");
   };
 
   if (!user) {
     return (
-      <p className="heading-tertiary">Zaloguj się, aby wypełnić formularz.</p>
+      <div className="container--center">
+        <p className="message-login">Log in to add a book</p>
+        <Link to="/">
+          <button className="btn btn--back">Go back</button>
+        </Link>
+      </div>
     );
   }
 
   return (
     <section className="section-add-book">
       <div className="container--add-book">
-        <form className="upload">
+        <form className="upload" onSubmit={handleSubmit}>
           <h2 className="upload__heading">Add your book to the store</h2>
           <label>Title</label>
           <input
@@ -103,10 +116,14 @@ export default function ProductNew() {
             onChange={handleChange}
             value={bookData.price}
           />
-
-          <button className="btn btn--upload" onClick={handleSubmit}>
-            Upload
-          </button>
+          <div className="container--form-buttons">
+            <button type="submit" className="btn btn--upload">
+              Upload
+            </button>
+            <Link to="/">
+              <button className="btn btn--upload">Back</button>
+            </Link>
+          </div>
         </form>
       </div>
     </section>

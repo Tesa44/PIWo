@@ -6,6 +6,7 @@ import ProductList from "../Components/ProductList";
 import { ProductProvider, useProducts } from "../Contexts/ProductContext";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../Services/init";
+
 export function meta() {
   return [
     { title: "Our Products" },
@@ -14,7 +15,7 @@ export function meta() {
 }
 
 export default function Home() {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
   // const { products } = useProducts();
 
   async function getProducts() {
@@ -32,21 +33,28 @@ export default function Home() {
   }, []);
 
   const [filters, setFilters] = useState({
+    userID: "",
     title: "",
     genre: "",
     ageGroup: "",
     keyWords: "",
     author: "",
   });
+
+  useEffect(() => {
+    handleSearch();
+  }, [filters]);
+
   const [filteredProducts, setFilteredProducts] = useState();
-  const handleSearch = (e) => {
-    e.preventDefault();
-
-    const isFilteringEmpty = Object.values(filters).every(
-      (value) => value === ""
-    );
-
+  const handleSearch = () => {
+    // e.preventDefault();
+    // console.log("ON SEARCH");
+    // console.log(filters);
     const filtered = products.filter((product) => {
+      const matchesUserID = filters.userID
+        ? product.userID === filters.userID
+        : true;
+
       const matchesTitle = product.title
         ? product.title.toLowerCase().includes(filters.title.toLowerCase())
         : true;
@@ -58,13 +66,24 @@ export default function Home() {
         ? product.ageGroup === filters.ageGroup
         : true;
       const matchesKeyWords = product.keyWords
-        .toLowerCase()
-        .includes(filters.keyWords.toLowerCase());
+        ? product.keyWords
+            .toLowerCase()
+            .includes(filters.keyWords.toLowerCase())
+        : true;
       const matchesAuthor = product.author
-        .toLowerCase()
-        .includes(filters.author.toLowerCase());
+        ? product.author.toLowerCase().includes(filters.author.toLowerCase())
+        : true;
 
+      console.log(
+        matchesUserID,
+        matchesAge,
+        matchesAuthor,
+        matchesGenre,
+        matchesKeyWords,
+        matchesTitle
+      );
       return (
+        matchesUserID &&
         matchesTitle &&
         matchesGenre &&
         matchesAge &&
@@ -73,7 +92,7 @@ export default function Home() {
         //matchesTitle && matchesKeyWords && matchesAuthor
       );
     });
-
+    // console.log("Filtered ", filtered);
     setFilteredProducts(filtered);
   };
 
