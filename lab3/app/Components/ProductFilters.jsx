@@ -70,7 +70,9 @@ export default function ProductFilters({ filters, setFilters, onSearch }) {
       </button>
       <span>Add your product</span>
       <Link to="/new">
-        <button className="btn btn--add">Add product</button>
+        <button className="btn btn--add" to="/new">
+          Add product
+        </button>
       </Link>
     </form>
   );

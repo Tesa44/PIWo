@@ -1,9 +1,19 @@
 import "../styles/navigation.css";
 import "../styles/general.css";
 import { useNavigate } from "react-router-dom";
-import { login } from "../Services/UserService";
+import { login, logout, useUser } from "../Services/UserService";
 export default function NavBar() {
   const navigate = useNavigate();
+  const user = useUser();
+
+  function handleLogin() {
+    if (!user) {
+      login(navigate);
+    } else {
+      logout();
+    }
+  }
+
   return (
     <header className="header">
       <a href="#">
@@ -39,8 +49,8 @@ export default function NavBar() {
       </nav>
       <div className="nav-container--btn">
         <button className="btn btn--header">Cart</button>
-        <button className="btn btn--header" onClick={() => login(navigate)}>
-          LOGIN
+        <button className="btn btn--header" onClick={handleLogin}>
+          {`${user ? "LOGOUT" : "LOGIN"}`}
         </button>
       </div>
     </header>
