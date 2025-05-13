@@ -65,7 +65,7 @@ export default function ProductFilters({ filters, setFilters, onSearch }) {
           />
         </li>
       </ul>
-      <button type="submit" className="btn btn--add">
+      <button type="submit" className="btn btn--add" onClick={handleChange}>
         Search
       </button>
       <span>Add your product</span>

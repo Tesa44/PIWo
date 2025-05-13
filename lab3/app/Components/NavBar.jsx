@@ -39,10 +39,9 @@ export default function NavBar() {
       </nav>
       <div className="nav-container--btn">
         <button className="btn btn--header">Cart</button>
-        <button
-          className="btn btn--header"
-          onClick={() => login(navigate)}
-        ></button>
+        <button className="btn btn--header" onClick={() => login(navigate)}>
+          LOGIN
+        </button>
       </div>
     </header>
   );

@@ -24,6 +24,7 @@ export default function Home() {
       ...doc.data(),
     }));
     setProducts(data);
+    setFilteredProducts(data);
   }
 
   useEffect(() => {
@@ -37,8 +38,7 @@ export default function Home() {
     keyWords: "",
     author: "",
   });
-  // const [filteredProducts, setFilteredProducts] = useState(products || []);
-
+  const [filteredProducts, setFilteredProducts] = useState();
   const handleSearch = (e) => {
     e.preventDefault();
 
@@ -48,8 +48,9 @@ export default function Home() {
 
     const filtered = products.filter((product) => {
       const matchesTitle = product.title
-        .toLowerCase()
-        .includes(filters.title.toLowerCase());
+        ? product.title.toLowerCase().includes(filters.title.toLowerCase())
+        : true;
+
       const matchesGenre = filters.genre
         ? product.genre === filters.genre
         : true;
@@ -69,10 +70,11 @@ export default function Home() {
         matchesAge &&
         matchesKeyWords &&
         matchesAuthor
+        //matchesTitle && matchesKeyWords && matchesAuthor
       );
     });
 
-    setProducts(filtered);
+    setFilteredProducts(filtered);
   };
 
   return (
@@ -88,7 +90,7 @@ export default function Home() {
               setFilters={setFilters}
               onSearch={handleSearch}
             />
-            <ProductList products={products} />
+            <ProductList products={filteredProducts} />
           </div>
         </div>
       </section>
