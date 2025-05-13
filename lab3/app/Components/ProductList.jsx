@@ -3,13 +3,8 @@ import "../styles/general.css";
 import "../styles/products.css";
 
 export default function ProductList({ products }) {
-
   if (!products || products.length === 0) {
-    return (
-      <p>
-        No serach results.
-      </p>
-    );
+    return <p>No serach results.</p>;
   }
 
   return (

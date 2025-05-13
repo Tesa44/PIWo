@@ -1,9 +1,11 @@
-import { useState } from "react";
-import Hero from "../Components/Hero"
-import NavBar from "../Components/NavBar"
+import { useEffect, useState } from "react";
+import Hero from "../Components/Hero";
+import NavBar from "../Components/NavBar";
 import ProductFilters from "../Components/ProductFilters";
 import ProductList from "../Components/ProductList";
 import { ProductProvider, useProducts } from "../Contexts/ProductContext";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../Services/init";
 export function meta() {
   return [
     { title: "Our Products" },
@@ -12,7 +14,21 @@ export function meta() {
 }
 
 export default function Home() {
-  const {products} = useProducts();
+  const [products, setProducts] = useState();
+  // const { products } = useProducts();
+
+  async function getProducts() {
+    const querySnapshot = await getDocs(collection(db, "books"));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setProducts(data);
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   const [filters, setFilters] = useState({
     title: "",
@@ -20,8 +36,8 @@ export default function Home() {
     ageGroup: "",
     keyWords: "",
     author: "",
-  });   
-  const [filteredProducts, setFilteredProducts] = useState(products || []);
+  });
+  // const [filteredProducts, setFilteredProducts] = useState(products || []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -56,22 +72,26 @@ export default function Home() {
       );
     });
 
-    setFilteredProducts(filtered);
+    setProducts(filtered);
   };
 
   return (
     <>
-    <NavBar></NavBar>
-    <Hero></Hero>
-    <section className="section-products">
-      <div className="flex--center-v">
-        <span className="subheading">Our products</span>
-        <div className="grid container container--products">
-            <ProductFilters filters={filters} setFilters={setFilters} onSearch={handleSearch} />
-            <ProductList products={filteredProducts} />
+      <NavBar></NavBar>
+      <Hero></Hero>
+      <section className="section-products">
+        <div className="flex--center-v">
+          <span className="subheading">Our products</span>
+          <div className="grid container container--products">
+            <ProductFilters
+              filters={filters}
+              setFilters={setFilters}
+              onSearch={handleSearch}
+            />
+            <ProductList products={products} />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 }
